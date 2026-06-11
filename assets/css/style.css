@@ -63,8 +63,17 @@ a:hover {
 }
 
 .brand-logo {
-  width: clamp(8.7rem, 16vw, 10.8rem);
-  height: auto;
+  width: 2.45rem;
+  height: 2.45rem;
+  object-fit: contain;
+}
+
+.brand-name {
+  margin-left: 0.62rem;
+  color: var(--brand-dark);
+  font-size: clamp(1.28rem, 2vw, 1.48rem);
+  font-weight: 850;
+  line-height: 1;
 }
 
 .nav-link {
@@ -693,7 +702,7 @@ a:hover {
 
 @media (max-width: 575.98px) {
   .navbar-brand {
-    max-width: 11rem;
+    max-width: 12rem;
   }
 
   .tech-grid {
