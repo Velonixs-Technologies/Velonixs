@@ -62,16 +62,9 @@ a:hover {
   letter-spacing: 0;
 }
 
-.brand-mark {
-  display: inline-grid;
-  width: 2.25rem;
-  height: 2.25rem;
-  place-items: center;
-  margin-right: 0.55rem;
-  border-radius: 8px;
-  color: #fff;
-  background: linear-gradient(135deg, var(--brand), var(--accent));
-  font-size: 1rem;
+.brand-logo {
+  width: clamp(8.7rem, 16vw, 10.8rem);
+  height: auto;
 }
 
 .nav-link {
@@ -306,10 +299,90 @@ a:hover {
   place-items: center;
   margin-bottom: 1rem;
   border-radius: 8px;
-  color: var(--brand-dark);
   background: linear-gradient(135deg, var(--brand-soft), #e8fff9);
-  font-size: 0.9rem;
-  font-weight: 850;
+}
+
+.icon-box::before {
+  content: "";
+  width: 1.72rem;
+  height: 1.72rem;
+  background-image: var(--icon-url);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.icon-cloud {
+  --icon-url: url("../img/icons/cloud.svg");
+}
+
+.icon-code,
+.icon-dotnet {
+  --icon-url: url("../img/icons/code.svg");
+}
+
+.icon-communication,
+.icon-consultation {
+  --icon-url: url("../img/icons/communication.svg");
+}
+
+.icon-email {
+  --icon-url: url("../img/icons/email.svg");
+}
+
+.icon-excellence {
+  --icon-url: url("../img/icons/excellence.svg");
+}
+
+.icon-global,
+.icon-location {
+  --icon-url: url("../img/icons/global.svg");
+}
+
+.icon-innovation {
+  --icon-url: url("../img/icons/innovation.svg");
+}
+
+.icon-learning {
+  --icon-url: url("../img/icons/learning.svg");
+}
+
+.icon-modernize {
+  --icon-url: url("../img/icons/modernize.svg");
+}
+
+.icon-partnership,
+.icon-custom {
+  --icon-url: url("../img/icons/partnership.svg");
+}
+
+.icon-quality,
+.icon-ok {
+  --icon-url: url("../img/icons/quality.svg");
+}
+
+.icon-response {
+  --icon-url: url("../img/icons/response.svg");
+}
+
+.icon-support {
+  --icon-url: url("../img/icons/support.svg");
+}
+
+.icon-team {
+  --icon-url: url("../img/icons/team.svg");
+}
+
+.icon-trust {
+  --icon-url: url("../img/icons/trust.svg");
+}
+
+.icon-value {
+  --icon-url: url("../img/icons/value.svg");
+}
+
+.icon-web {
+  --icon-url: url("../img/icons/web.svg");
 }
 
 .feature-card h3,
@@ -359,6 +432,19 @@ a:hover {
   margin-top: 1rem;
   font-size: clamp(2.5rem, 5vw, 4rem);
   line-height: 1;
+}
+
+.visual-icon {
+  display: block;
+  width: clamp(4rem, 8vw, 6.5rem);
+  height: clamp(4rem, 8vw, 6.5rem);
+  margin-top: 1rem;
+  background-image: var(--icon-url);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.92;
 }
 
 .check-list {
@@ -606,13 +692,8 @@ a:hover {
 }
 
 @media (max-width: 575.98px) {
-  .brand-mark {
-    width: 2rem;
-    height: 2rem;
-  }
-
   .navbar-brand {
-    font-size: 1.25rem;
+    max-width: 11rem;
   }
 
   .tech-grid {

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="260" height="64" viewBox="0 0 260 64" role="img" aria-labelledby="title desc">
+  <title id="title">Velonixs</title>
+  <desc id="desc">Velonixs Technology logo</desc>
+  <defs>
+    <linearGradient id="markGradient" x1="8" y1="6" x2="56" y2="58" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0f63d6"/>
+      <stop offset="1" stop-color="#00b894"/>
+    </linearGradient>
+  </defs>
+  <rect x="6" y="6" width="52" height="52" rx="14" fill="url(#markGradient)"/>
+  <path d="M18 18h9l7 22 7-22h9L38 46h-9L18 18Z" fill="#fff"/>
+  <text x="72" y="43" fill="#073b7a" font-family="Segoe UI, Arial, sans-serif" font-size="32" font-weight="800">Velonixs</text>
+</svg>
