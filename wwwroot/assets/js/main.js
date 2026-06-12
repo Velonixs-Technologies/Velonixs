@@ -1,8 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const currentPage = window.location.pathname.split("/").pop() || "index.html";
+  const currentPath = window.location.pathname.replace(/\/$/, "") || "/";
 
   document.querySelectorAll(".navbar-nav .nav-link").forEach(function (link) {
-    if (link.getAttribute("href") === currentPage) {
+    const linkPath = new URL(link.getAttribute("href"), window.location.origin).pathname.replace(/\/$/, "") || "/";
+
+    if (linkPath === currentPath) {
       link.classList.add("active");
       link.setAttribute("aria-current", "page");
     }

@@ -1,7 +1,10 @@
+using Velonixs.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddSingleton<SiteContentService>();
 
 var app = builder.Build();
 
@@ -14,6 +17,28 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseStaticFiles();
+
+var legacyRoutes = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+{
+    ["/index.html"] = "/",
+    ["/services.html"] = "/services",
+    ["/about.html"] = "/about",
+    ["/contact.html"] = "/contact"
+};
+
+app.Use(async (context, next) =>
+{
+    var requestPath = context.Request.Path.Value?.TrimEnd('/') ?? string.Empty;
+
+    if (legacyRoutes.TryGetValue(requestPath, out var canonicalPath))
+    {
+        context.Response.Redirect(canonicalPath + context.Request.QueryString, permanent: true);
+        return;
+    }
+
+    await next();
+});
+
 app.UseRouting();
 
 app.UseAuthorization();
@@ -21,6 +46,5 @@ app.UseAuthorization();
 app.MapStaticAssets();
 app.MapRazorPages()
    .WithStaticAssets();
-app.MapGet("/index.html", () => Results.Redirect("/", permanent: true));
 
 app.Run();

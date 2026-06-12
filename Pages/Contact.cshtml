@@ -1,4 +1,5 @@
-@page "/contact.html"
+@page "/contact"
+@model ContactModel
 @{
     ViewData["Title"] = "Contact Us - Velonixs Technology";
     ViewData["Description"] = "Contact Velonixs Technology to discuss your software development, cloud, modernization, or dedicated engineering team needs.";
@@ -6,249 +7,173 @@
 }
 
 <section class="page-hero">
-      <div class="container">
-        <h1>Get in Touch</h1>
-        <p>Tell us about your project, team needs, or modernization goals. We will respond with a clear next step.</p>
-      </div>
-    </section>
+    <div class="container">
+        <h1>@Model.PageContent.Hero.Title</h1>
+        <p>@Model.PageContent.Hero.Description</p>
+    </div>
+</section>
 
-    <section class="section">
-      <div class="container">
+<section class="section">
+    <div class="container">
         <div class="section-heading">
-          <h2>How to Reach Us</h2>
-          <p>Multiple ways to connect with our team.</p>
+            <h2>@Model.PageContent.ReachHeading.Title</h2>
+            <p>@Model.PageContent.ReachHeading.Description</p>
         </div>
         <div class="row g-4 justify-content-center">
-          <div class="col-md-4">
-            <article class="contact-card text-center">
-              <span class="icon-box icon-email" aria-hidden="true"></span>
-              <h3>Email</h3>
-              <p><a href="mailto:info@velonixs.com">info@velonixs.com</a></p>
-              <p class="small">We respond within 24 hours.</p>
-            </article>
-          </div>
-          <div class="col-md-4">
-            <article class="contact-card text-center">
-              <span class="icon-box icon-web" aria-hidden="true"></span>
-              <h3>Website</h3>
-              <p><a href="https://velonixs.com">velonixs.com</a></p>
-              <p class="small">Visit for more company information.</p>
-            </article>
-          </div>
-          <div class="col-md-4">
-            <article class="contact-card text-center">
-              <span class="icon-box icon-location" aria-hidden="true"></span>
-              <h3>Location</h3>
-              <p class="fw-bold">India</p>
-              <p class="small">Serving clients globally.</p>
-            </article>
-          </div>
+            @foreach (var method in Model.PageContent.ContactMethods)
+            {
+                <div class="col-md-4">
+                    <article class="contact-card text-center">
+                        <span class="icon-box @method.IconClass" aria-hidden="true"></span>
+                        <h3>@method.Title</h3>
+                        @if (!string.IsNullOrWhiteSpace(method.Url))
+                        {
+                            <p><a href="@method.Url">@method.PrimaryText</a></p>
+                        }
+                        else if (method.IsStrong)
+                        {
+                            <p class="fw-bold">@method.PrimaryText</p>
+                        }
+                        else
+                        {
+                            <p>@method.PrimaryText</p>
+                        }
+                        <p class="small">@method.SecondaryText</p>
+                    </article>
+                </div>
+            }
         </div>
-      </div>
-    </section>
+    </div>
+</section>
 
-    <section class="section section-alt">
-      <div class="container">
+<section class="section section-alt">
+    <div class="container">
         <div class="row g-5 align-items-start">
-          <div class="col-lg-5">
-            <span class="eyebrow text-primary">Start the conversation</span>
-            <h2 class="fw-bold mb-3">Send us a message.</h2>
-            <p class="lead text-muted">Share a few details about what you want to build, improve, or staff. We will get back to you shortly.</p>
-            <div class="row g-3 mt-2">
-              <div class="col-sm-6">
-                <article class="value-card">
-                  <h3>Quick Response</h3>
-                  <p>Initial replies are typically sent within 24 hours.</p>
-                </article>
-              </div>
-              <div class="col-sm-6">
-                <article class="value-card">
-                  <h3>Expert Consultation</h3>
-                  <p>Discuss needs directly with a technical delivery team.</p>
-                </article>
-              </div>
+            <div class="col-lg-5">
+                <span class="eyebrow text-primary">@Model.PageContent.FormEyebrow</span>
+                <h2 class="fw-bold mb-3">@Model.PageContent.FormTitle</h2>
+                <p class="lead text-muted">@Model.PageContent.FormDescription</p>
+                <div class="row g-3 mt-2">
+                    @foreach (var card in Model.PageContent.FormHighlights)
+                    {
+                        <div class="@card.ColumnClass">
+                            <article class="@card.ArticleClass">
+                                <h3>@card.Title</h3>
+                                <p>@card.Description</p>
+                            </article>
+                        </div>
+                    }
+                </div>
             </div>
-          </div>
-          <div class="col-lg-7">
-            <form id="contactForm" class="contact-form needs-validation" novalidate>
-              <div class="row g-3">
-                <div class="col-md-6">
-                  <label for="name" class="form-label fw-bold">Full Name *</label>
-                  <input type="text" class="form-control" id="name" name="name" required placeholder="Your full name">
-                  <div class="invalid-feedback">Please enter your name.</div>
-                </div>
-                <div class="col-md-6">
-                  <label for="email" class="form-label fw-bold">Email Address *</label>
-                  <input type="email" class="form-control" id="email" name="email" required placeholder="you@example.com">
-                  <div class="invalid-feedback">Please enter a valid email.</div>
-                </div>
-                <div class="col-md-6">
-                  <label for="phone" class="form-label fw-bold">Phone Number</label>
-                  <input type="tel" class="form-control" id="phone" name="phone" placeholder="+1 (555) 123-4567">
-                </div>
-                <div class="col-md-6">
-                  <label for="company" class="form-label fw-bold">Company Name</label>
-                  <input type="text" class="form-control" id="company" name="company" placeholder="Your company">
-                </div>
-                <div class="col-12">
-                  <label for="service" class="form-label fw-bold">Service of Interest *</label>
-                  <select class="form-select" id="service" name="service" required>
-                    <option value="">Select a service</option>
-                    <option value="custom-software">Custom Software Development</option>
-                    <option value="web-applications">Web Application Development</option>
-                    <option value="dotnet">.NET Development</option>
-                    <option value="cloud">Cloud & Azure Solutions</option>
-                    <option value="legacy">Legacy Application Modernization</option>
-                    <option value="dedicated">Dedicated Developer Hiring</option>
-                    <option value="staff-augmentation">IT Staff Augmentation</option>
-                    <option value="other">Other</option>
-                  </select>
-                  <div class="invalid-feedback">Please choose a service.</div>
-                </div>
-                <div class="col-12">
-                  <label for="message" class="form-label fw-bold">Message *</label>
-                  <textarea class="form-control" id="message" name="message" rows="5" required placeholder="Tell us about your project..."></textarea>
-                  <div class="invalid-feedback">Please share a short message.</div>
-                </div>
-                <div class="col-12">
-                  <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="agree" name="agree" required>
-                    <label class="form-check-label" for="agree">I agree to the privacy policy and terms of service.</label>
-                    <div class="invalid-feedback">Please confirm before submitting.</div>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <button type="submit" class="btn btn-primary btn-lg w-100">Send Message</button>
-                </div>
-              </div>
-            </form>
-          </div>
+            <div class="col-lg-7">
+                <form id="contactForm" class="contact-form needs-validation" novalidate>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="name" class="form-label fw-bold">Full Name *</label>
+                            <input type="text" class="form-control" id="name" name="name" required placeholder="Your full name">
+                            <div class="invalid-feedback">Please enter your name.</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="email" class="form-label fw-bold">Email Address *</label>
+                            <input type="email" class="form-control" id="email" name="email" required placeholder="you@example.com">
+                            <div class="invalid-feedback">Please enter a valid email.</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="phone" class="form-label fw-bold">Phone Number</label>
+                            <input type="tel" class="form-control" id="phone" name="phone" placeholder="+1 (555) 123-4567">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="company" class="form-label fw-bold">Company Name</label>
+                            <input type="text" class="form-control" id="company" name="company" placeholder="Your company">
+                        </div>
+                        <div class="col-12">
+                            <label for="service" class="form-label fw-bold">Service of Interest *</label>
+                            <select class="form-select" id="service" name="service" required>
+                                <option value="">Select a service</option>
+                                @foreach (var option in Model.PageContent.ServiceOptions)
+                                {
+                                    <option value="@option.Value">@option.Text</option>
+                                }
+                            </select>
+                            <div class="invalid-feedback">Please choose a service.</div>
+                        </div>
+                        <div class="col-12">
+                            <label for="message" class="form-label fw-bold">Message *</label>
+                            <textarea class="form-control" id="message" name="message" rows="5" required placeholder="Tell us about your project..."></textarea>
+                            <div class="invalid-feedback">Please share a short message.</div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="agree" name="agree" required>
+                                <label class="form-check-label" for="agree">I agree to the privacy policy and terms of service.</label>
+                                <div class="invalid-feedback">Please confirm before submitting.</div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary btn-lg w-100">Send Message</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
-      </div>
-    </section>
+    </div>
+</section>
 
-    <section class="section">
-      <div class="container">
+<section class="section">
+    <div class="container">
         <div class="section-heading">
-          <h2>Why Contact Velonixs?</h2>
-          <p>We keep discovery practical, technical, and focused on the next useful decision.</p>
+            <h2>@Model.PageContent.WhyHeading.Title</h2>
+            <p>@Model.PageContent.WhyHeading.Description</p>
         </div>
         <div class="row g-4">
-          <div class="col-md-6 col-lg-4">
-            <article class="feature-card">
-              <span class="icon-box icon-response" aria-hidden="true"></span>
-              <h3>Quick Response</h3>
-              <p>We understand urgency and respond quickly to new project inquiries.</p>
-            </article>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <article class="feature-card">
-              <span class="icon-box icon-consultation" aria-hidden="true"></span>
-              <h3>Technical Consultation</h3>
-              <p>Discuss requirements, risks, architecture, and project scope with engineers.</p>
-            </article>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <article class="feature-card">
-              <span class="icon-box icon-support" aria-hidden="true"></span>
-              <h3>Professional Support</h3>
-              <p>Get clear answers about delivery models, timelines, and team structure.</p>
-            </article>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <article class="feature-card">
-              <span class="icon-box icon-custom" aria-hidden="true"></span>
-              <h3>Customized Solutions</h3>
-              <p>Every solution is shaped around your specific goals, systems, and users.</p>
-            </article>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <article class="feature-card">
-              <span class="icon-box icon-global" aria-hidden="true"></span>
-              <h3>Global Reach</h3>
-              <p>Though based in India, we serve clients across regions and time zones.</p>
-            </article>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <article class="feature-card">
-              <span class="icon-box icon-ok" aria-hidden="true"></span>
-              <h3>Practical Delivery</h3>
-              <p>We focus on maintainable systems, measured progress, and clear communication.</p>
-            </article>
-          </div>
+            @foreach (var card in Model.PageContent.WhyCards)
+            {
+                <div class="@card.ColumnClass">
+                    <article class="@card.ArticleClass">
+                        <span class="icon-box @card.IconClass" aria-hidden="true"></span>
+                        <h3>@card.Title</h3>
+                        <p>@card.Description</p>
+                    </article>
+                </div>
+            }
         </div>
-      </div>
-    </section>
+    </div>
+</section>
 
-    <section class="section section-alt">
-      <div class="container">
+<section class="section section-alt">
+    <div class="container">
         <div class="section-heading">
-          <h2>Frequently Asked Questions</h2>
-          <p>Short answers to common project-start questions.</p>
+            <h2>@Model.PageContent.FaqHeading.Title</h2>
+            <p>@Model.PageContent.FaqHeading.Description</p>
         </div>
         <div class="row justify-content-center">
-          <div class="col-lg-9">
-            <div class="accordion" id="faqAccordion">
-              <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true" aria-controls="faq1">
-                    What is your typical project timeline?
-                  </button>
-                </h2>
-                <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
-                  <div class="accordion-body">Project timelines vary based on complexity and scope. During consultation, we provide realistic estimates tailored to your requirements.</div>
+            <div class="col-lg-9">
+                <div class="accordion" id="faqAccordion">
+                    @for (var index = 0; index < Model.PageContent.Faqs.Count; index++)
+                    {
+                        var faq = Model.PageContent.Faqs[index];
+                        var isFirst = index == 0;
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button @(isFirst ? "" : "collapsed")" type="button" data-bs-toggle="collapse" data-bs-target="#@faq.Id" aria-expanded="@(isFirst.ToString().ToLowerInvariant())" aria-controls="@faq.Id">
+                                    @faq.Question
+                                </button>
+                            </h2>
+                            <div id="@faq.Id" class="accordion-collapse collapse @(isFirst ? "show" : "")" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">@faq.Answer</div>
+                            </div>
+                        </div>
+                    }
                 </div>
-              </div>
-              <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
-                    Do you offer post-launch support?
-                  </button>
-                </h2>
-                <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                  <div class="accordion-body">Yes. We provide maintenance, bug fixes, enhancements, monitoring, and optimization after launch.</div>
-                </div>
-              </div>
-              <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
-                    What pricing models do you support?
-                  </button>
-                </h2>
-                <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                  <div class="accordion-body">We support fixed-price projects, time and material, dedicated team engagements, and staff augmentation models.</div>
-                </div>
-              </div>
-              <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">
-                    Can you mobilize resources quickly?
-                  </button>
-                </h2>
-                <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                  <div class="accordion-body">Yes. We can help assemble dedicated resources for urgent projects after confirming skill requirements and timelines.</div>
-                </div>
-              </div>
-              <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="false" aria-controls="faq5">
-                    How do you handle data security?
-                  </button>
-                </h2>
-                <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                  <div class="accordion-body">We apply secure design practices, access controls, encryption where appropriate, secure APIs, and project-specific security review steps.</div>
-                </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
-    </section>
+    </div>
+</section>
 
-    <section class="cta-band">
-      <div class="container">
-        <h2>Ready to start your project?</h2>
-        <p>Send us a message today and we will help map the next step for your business goals.</p>
-        <a href="#contactForm" class="btn btn-light btn-lg">Start the Form</a>
-      </div>
-    </section>
+<section class="cta-band">
+    <div class="container">
+        <h2>@Model.PageContent.Cta.Title</h2>
+        <p>@Model.PageContent.Cta.Description</p>
+        <a href="@Model.PageContent.Cta.Action.Url" class="@Model.PageContent.Cta.Action.CssClass">@Model.PageContent.Cta.Action.Text</a>
+    </div>
+</section>

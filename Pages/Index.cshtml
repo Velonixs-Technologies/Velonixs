@@ -1,4 +1,5 @@
 @page
+@model IndexModel
 @{
     ViewData["Title"] = "Velonixs - Software Development & IT Services";
     ViewData["Description"] = "Velonixs Technology builds custom software, cloud platforms, web applications, and dedicated engineering teams for growing businesses.";
@@ -6,240 +7,122 @@
 }
 
 <section class="hero">
-      <div class="container">
+    <div class="container">
         <div class="hero-content">
-          <span class="eyebrow">Global software delivery</span>
-          <h1>Digital products built for momentum.</h1>
-          <p>Velonixs helps teams design, build, modernize, and scale secure software across custom applications, cloud platforms, and dedicated engineering services.</p>
-          <div class="hero-actions">
-            <a href="/services.html" class="btn btn-primary btn-lg">Explore Services</a>
-            <a href="/contact.html" class="btn btn-outline-light btn-lg">Start a Project</a>
-          </div>
+            <span class="eyebrow">@Model.PageContent.Hero.Eyebrow</span>
+            <h1>@Model.PageContent.Hero.Title</h1>
+            <p>@Model.PageContent.Hero.Description</p>
+            <div class="hero-actions">
+                @foreach (var action in Model.PageContent.Hero.Actions)
+                {
+                    <a href="@action.Url" class="@action.CssClass">@action.Text</a>
+                }
+            </div>
         </div>
         <div class="hero-stats" aria-label="Velonixs delivery highlights">
-          <div class="stat">
-            <strong>7+</strong>
-            <span>service areas across product, cloud, and teams</span>
-          </div>
-          <div class="stat">
-            <strong>24h</strong>
-            <span>typical response window for new inquiries</span>
-          </div>
-          <div class="stat">
-            <strong>Global</strong>
-            <span>delivery from India for clients worldwide</span>
-          </div>
+            @foreach (var stat in Model.PageContent.Hero.Stats)
+            {
+                <div class="stat">
+                    <strong>@stat.Value</strong>
+                    <span>@stat.Label</span>
+                </div>
+            }
         </div>
-      </div>
-    </section>
+    </div>
+</section>
 
-    <section class="section">
-      <div class="container">
+<section class="section">
+    <div class="container">
         <div class="section-heading">
-          <h2>Why Choose Velonixs?</h2>
-          <p>We combine enterprise delivery discipline with the speed and clarity modern software teams need.</p>
+            <h2>@Model.PageContent.WhyHeading.Title</h2>
+            <p>@Model.PageContent.WhyHeading.Description</p>
         </div>
         <div class="row g-4">
-          <div class="col-md-6 col-lg-4">
-            <article class="feature-card">
-              <span class="icon-box icon-excellence" aria-hidden="true"></span>
-              <h3>Enterprise Experience</h3>
-              <p>Architecture-minded delivery for business-critical software, integrations, and internal platforms.</p>
-            </article>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <article class="feature-card">
-              <span class="icon-box icon-quality" aria-hidden="true"></span>
-              <h3>Quality First</h3>
-              <p>Clean engineering practices, security awareness, and pragmatic testing from planning through launch.</p>
-            </article>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <article class="feature-card">
-              <span class="icon-box icon-value" aria-hidden="true"></span>
-              <h3>Cost Effective</h3>
-              <p>Flexible delivery models that help you increase output without overextending your core team.</p>
-            </article>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <article class="feature-card">
-              <span class="icon-box icon-partnership" aria-hidden="true"></span>
-              <h3>Partnership Focus</h3>
-              <p>Long-term thinking, honest tradeoffs, and delivery shaped around your actual business goals.</p>
-            </article>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <article class="feature-card">
-              <span class="icon-box icon-communication" aria-hidden="true"></span>
-              <h3>Transparent Communication</h3>
-              <p>Clear updates, shared priorities, and collaborative feedback loops throughout the engagement.</p>
-            </article>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <article class="feature-card">
-              <span class="icon-box icon-innovation" aria-hidden="true"></span>
-              <h3>Innovation</h3>
-              <p>Modern technology choices balanced with maintainability, reliability, and operational fit.</p>
-            </article>
-          </div>
+            @foreach (var card in Model.PageContent.WhyCards)
+            {
+                <div class="@card.ColumnClass">
+                    <article class="@card.ArticleClass">
+                        <span class="icon-box @card.IconClass" aria-hidden="true"></span>
+                        <h3>@card.Title</h3>
+                        <p>@card.Description</p>
+                    </article>
+                </div>
+            }
         </div>
-      </div>
-    </section>
+    </div>
+</section>
 
-    <section class="section section-alt">
-      <div class="container">
+<section class="section section-alt">
+    <div class="container">
         <div class="section-heading">
-          <h2>Our Core Services</h2>
-          <p>Focused capabilities for companies that need dependable software delivery and scalable engineering support.</p>
+            <h2>@Model.PageContent.ServicesHeading.Title</h2>
+            <p>@Model.PageContent.ServicesHeading.Description</p>
         </div>
         <div class="row g-4">
-          <div class="col-md-6 col-xl-4">
-            <article class="service-card">
-              <span class="icon-box icon-code" aria-hidden="true"></span>
-              <h3>Custom Software Development</h3>
-              <p>Applications tailored to your workflows, business rules, users, and growth plans.</p>
-            </article>
-          </div>
-          <div class="col-md-6 col-xl-4">
-            <article class="service-card">
-              <span class="icon-box icon-web" aria-hidden="true"></span>
-              <h3>Web Application Development</h3>
-              <p>Responsive, secure web platforms with clean UX and robust backend foundations.</p>
-            </article>
-          </div>
-          <div class="col-md-6 col-xl-4">
-            <article class="service-card">
-              <span class="icon-box icon-cloud" aria-hidden="true"></span>
-              <h3>Cloud & Azure Solutions</h3>
-              <p>Cloud architecture, migration, DevOps enablement, monitoring, and cost optimization.</p>
-            </article>
-          </div>
-          <div class="col-md-6 col-xl-4">
-            <article class="service-card">
-              <span class="icon-box icon-dotnet" aria-hidden="true"></span>
-              <h3>.NET Development</h3>
-              <p>Enterprise-grade .NET applications, APIs, integrations, and modernization initiatives.</p>
-            </article>
-          </div>
-          <div class="col-md-6 col-xl-4">
-            <article class="service-card">
-              <span class="icon-box icon-modernize" aria-hidden="true"></span>
-              <h3>Legacy Modernization</h3>
-              <p>Re-platform, refactor, and improve aging applications while reducing delivery risk.</p>
-            </article>
-          </div>
-          <div class="col-md-6 col-xl-4">
-            <article class="service-card">
-              <span class="icon-box icon-team" aria-hidden="true"></span>
-              <h3>Dedicated Engineering Teams</h3>
-              <p>Pre-vetted developers and technical specialists who integrate with your team.</p>
-            </article>
-          </div>
+            @foreach (var card in Model.PageContent.ServiceCards)
+            {
+                <div class="@card.ColumnClass">
+                    <article class="@card.ArticleClass">
+                        <span class="icon-box @card.IconClass" aria-hidden="true"></span>
+                        <h3>@card.Title</h3>
+                        <p>@card.Description</p>
+                    </article>
+                </div>
+            }
         </div>
         <div class="text-center mt-5">
-          <a href="/services.html" class="btn btn-primary">View All Services</a>
+            <a href="/services" class="btn btn-primary">View All Services</a>
         </div>
-      </div>
-    </section>
+    </div>
+</section>
 
-    <section class="section">
-      <div class="container">
+<section class="section">
+    <div class="container">
         <div class="section-heading">
-          <h2>Technology Expertise</h2>
-          <p>Practical modern stacks for applications that need to be fast, secure, observable, and maintainable.</p>
+            <h2>@Model.PageContent.TechHeading.Title</h2>
+            <p>@Model.PageContent.TechHeading.Description</p>
         </div>
         <div class="tech-grid">
-          <article class="tech-card">
-            <h3>Microsoft Technologies</h3>
-            <ul class="check-list">
-              <li>.NET 8 & ASP.NET Core</li>
-              <li>C# Programming</li>
-              <li>Web API Development</li>
-              <li>Entity Framework</li>
-            </ul>
-          </article>
-          <article class="tech-card">
-            <h3>Frontend</h3>
-            <ul class="check-list">
-              <li>React & Angular</li>
-              <li>TypeScript</li>
-              <li>HTML5 & CSS3</li>
-              <li>Responsive UI</li>
-            </ul>
-          </article>
-          <article class="tech-card">
-            <h3>Cloud & DevOps</h3>
-            <ul class="check-list">
-              <li>Microsoft Azure</li>
-              <li>Docker & Kubernetes</li>
-              <li>CI/CD Pipelines</li>
-              <li>Infrastructure as Code</li>
-            </ul>
-          </article>
-          <article class="tech-card">
-            <h3>Data Platforms</h3>
-            <ul class="check-list">
-              <li>SQL Server</li>
-              <li>PostgreSQL</li>
-              <li>MongoDB</li>
-              <li>MySQL</li>
-            </ul>
-          </article>
+            @foreach (var group in Model.PageContent.TechGroups)
+            {
+                <article class="tech-card">
+                    <h3>@group.Title</h3>
+                    <ul class="check-list">
+                        @foreach (var item in group.Items)
+                        {
+                            <li>@item</li>
+                        }
+                    </ul>
+                </article>
+            }
         </div>
-      </div>
-    </section>
+    </div>
+</section>
 
-    <section class="section section-alt">
-      <div class="container">
+<section class="section section-alt">
+    <div class="container">
         <div class="section-heading">
-          <h2>Industries We Serve</h2>
-          <p>Domain-flexible delivery for operational, customer-facing, and data-heavy systems.</p>
+            <h2>@Model.PageContent.IndustriesHeading.Title</h2>
+            <p>@Model.PageContent.IndustriesHeading.Description</p>
         </div>
         <div class="row g-4">
-          <div class="col-md-6 col-lg-4">
-            <article class="value-card">
-              <h3>Manufacturing</h3>
-              <p>Production planning, inventory management, dashboards, and process automation.</p>
-            </article>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <article class="value-card">
-              <h3>Healthcare</h3>
-              <p>Patient portals, operational systems, reporting tools, and workflow software.</p>
-            </article>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <article class="value-card">
-              <h3>Education</h3>
-              <p>Learning platforms, student portals, administration tools, and integrations.</p>
-            </article>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <article class="value-card">
-              <h3>Retail & E-Commerce</h3>
-              <p>Stores, inventory systems, customer journeys, and sales operations platforms.</p>
-            </article>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <article class="value-card">
-              <h3>Logistics & Supply Chain</h3>
-              <p>Tracking, fleet management, dispatch workflows, and supply chain automation.</p>
-            </article>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <article class="value-card">
-              <h3>Financial Services</h3>
-              <p>Secure financial applications, workflow platforms, and reporting systems.</p>
-            </article>
-          </div>
+            @foreach (var card in Model.PageContent.IndustryCards)
+            {
+                <div class="@card.ColumnClass">
+                    <article class="@card.ArticleClass">
+                        <h3>@card.Title</h3>
+                        <p>@card.Description</p>
+                    </article>
+                </div>
+            }
         </div>
-      </div>
-    </section>
+    </div>
+</section>
 
-    <section class="cta-band">
-      <div class="container">
-        <h2>Ready to accelerate your digital journey?</h2>
-        <p>Tell us what you are building, modernizing, or scaling. We will help shape a clear technical path forward.</p>
-        <a href="/contact.html" class="btn btn-light btn-lg">Get in Touch Today</a>
-      </div>
-    </section>
+<section class="cta-band">
+    <div class="container">
+        <h2>@Model.PageContent.Cta.Title</h2>
+        <p>@Model.PageContent.Cta.Description</p>
+        <a href="@Model.PageContent.Cta.Action.Url" class="@Model.PageContent.Cta.Action.CssClass">@Model.PageContent.Cta.Action.Text</a>
+    </div>
+</section>

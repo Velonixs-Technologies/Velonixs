@@ -1,4 +1,5 @@
-@page "/services.html"
+@page "/services"
+@model ServicesModel
 @{
     ViewData["Title"] = "Our Services - Velonixs Technology";
     ViewData["Description"] = "Explore Velonixs services including custom software development, web applications, .NET development, Azure cloud solutions, modernization, and staff augmentation.";
@@ -6,277 +7,72 @@
 }
 
 <section class="page-hero">
-      <div class="container">
-        <h1>Services That Move Software Forward</h1>
-        <p>From new products to legacy modernization, Velonixs delivers practical engineering support at every stage.</p>
-      </div>
-    </section>
+    <div class="container">
+        <h1>@Model.PageContent.Hero.Title</h1>
+        <p>@Model.PageContent.Hero.Description</p>
+    </div>
+</section>
 
-    <section class="section">
-      <div class="container">
+<section class="section">
+    <div class="container">
         <div class="section-heading">
-          <h2>What We Offer</h2>
-          <p>End-to-end delivery models for applications, platforms, cloud systems, and technical teams.</p>
+            <h2>@Model.PageContent.OfferHeading.Title</h2>
+            <p>@Model.PageContent.OfferHeading.Description</p>
         </div>
         <div class="row g-4">
-          <div class="col-md-6 col-lg-4">
-            <a class="service-card d-block" href="#custom-software">
-              <span class="icon-box icon-code" aria-hidden="true"></span>
-              <h3>Custom Software</h3>
-              <p>Purpose-built business systems and workflow platforms.</p>
-            </a>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <a class="service-card d-block" href="#web-apps">
-              <span class="icon-box icon-web" aria-hidden="true"></span>
-              <h3>Web Applications</h3>
-              <p>Responsive web platforms, portals, APIs, and dashboards.</p>
-            </a>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <a class="service-card d-block" href="#dotnet">
-              <span class="icon-box icon-dotnet" aria-hidden="true"></span>
-              <h3>.NET Development</h3>
-              <p>Enterprise-grade .NET solutions and API development.</p>
-            </a>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <a class="service-card d-block" href="#cloud">
-              <span class="icon-box icon-cloud" aria-hidden="true"></span>
-              <h3>Cloud & Azure</h3>
-              <p>Cloud migration, DevOps, optimization, and governance.</p>
-            </a>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <a class="service-card d-block" href="#legacy">
-              <span class="icon-box icon-modernize" aria-hidden="true"></span>
-              <h3>Modernization</h3>
-              <p>Improve legacy applications without derailing operations.</p>
-            </a>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <a class="service-card d-block" href="#teams">
-              <span class="icon-box icon-team" aria-hidden="true"></span>
-              <h3>Engineering Teams</h3>
-              <p>Dedicated developers and staff augmentation support.</p>
-            </a>
-          </div>
+            @foreach (var card in Model.PageContent.OfferCards)
+            {
+                <div class="@card.ColumnClass">
+                    <a class="@card.ArticleClass" href="@card.Url">
+                        <span class="icon-box @card.IconClass" aria-hidden="true"></span>
+                        <h3>@card.Title</h3>
+                        <p>@card.Description</p>
+                    </a>
+                </div>
+            }
         </div>
-      </div>
-    </section>
+    </div>
+</section>
 
-    <section class="service-strip">
-      <div class="container">
-        <div id="custom-software" class="row g-4 service-row">
-          <div class="col-lg-6">
-            <span class="eyebrow text-primary">Custom software</span>
-            <h2 class="fw-bold mb-3">Applications tailored to how your business actually works.</h2>
-            <p class="lead text-muted">Off-the-shelf software rarely fits unique workflows. We build reliable applications that align with your business processes, users, and growth plans.</p>
-            <div class="row">
-              <div class="col-md-6">
-                <h5 class="fw-bold mt-4">Capabilities</h5>
-                <ul class="check-list">
-                  <li>Enterprise software development</li>
-                  <li>Business process automation</li>
-                  <li>Workflow management systems</li>
-                  <li>CRM and ERP solutions</li>
-                </ul>
-              </div>
-              <div class="col-md-6">
-                <h5 class="fw-bold mt-4">Benefits</h5>
-                <ul class="check-list">
-                  <li>Improved operational efficiency</li>
-                  <li>Reduced manual effort</li>
-                  <li>Better business visibility</li>
-                  <li>Scalable architecture</li>
-                </ul>
-              </div>
+<section class="service-strip">
+    <div class="container">
+        @foreach (var service in Model.PageContent.ServiceDetails)
+        {
+            <div id="@service.Id" class="row g-4 service-row">
+                <div class="col-lg-6 @(service.Reverse ? "order-lg-2" : "")">
+                    <span class="eyebrow text-primary">@service.Eyebrow</span>
+                    <h2 class="fw-bold mb-3">@service.Title</h2>
+                    <p class="lead text-muted">@service.Description</p>
+                    <div class="row">
+                        @foreach (var list in service.Lists)
+                        {
+                            <div class="col-md-6">
+                                <h5 class="fw-bold mt-4">@list.Title</h5>
+                                <ul class="check-list">
+                                    @foreach (var item in list.Items)
+                                    {
+                                        <li>@item</li>
+                                    }
+                                </ul>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="col-lg-6 @(service.Reverse ? "order-lg-1" : "")">
+                    <div class="service-visual d-flex flex-column justify-content-end">
+                        <span>@service.VisualTitle</span>
+                        <span class="visual-icon @service.IconClass" aria-hidden="true"></span>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="col-lg-6">
-            <div class="service-visual d-flex flex-column justify-content-end">
-              <span>Business platform engineering</span>
-              <span class="visual-icon icon-code" aria-hidden="true"></span>
-            </div>
-          </div>
-        </div>
+        }
+    </div>
+</section>
 
-        <div id="web-apps" class="row g-4 service-row">
-          <div class="col-lg-6 order-lg-2">
-            <span class="eyebrow text-primary">Web applications</span>
-            <h2 class="fw-bold mb-3">Modern web experiences with dependable backend foundations.</h2>
-            <p class="lead text-muted">We design and develop responsive web applications that keep performance, security, accessibility, and maintainability in view.</p>
-            <div class="row">
-              <div class="col-md-6">
-                <h5 class="fw-bold mt-4">Technologies</h5>
-                <ul class="check-list">
-                  <li>ASP.NET Core</li>
-                  <li>Angular & React</li>
-                  <li>REST APIs</li>
-                  <li>SQL Server & PostgreSQL</li>
-                </ul>
-              </div>
-              <div class="col-md-6">
-                <h5 class="fw-bold mt-4">Solutions</h5>
-                <ul class="check-list">
-                  <li>Business portals</li>
-                  <li>Customer portals</li>
-                  <li>E-commerce applications</li>
-                  <li>Enterprise dashboards</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-6 order-lg-1">
-            <div class="service-visual d-flex flex-column justify-content-end">
-              <span>Responsive application delivery</span>
-              <span class="visual-icon icon-web" aria-hidden="true"></span>
-            </div>
-          </div>
-        </div>
-
-        <div id="dotnet" class="row g-4 service-row">
-          <div class="col-lg-6">
-            <span class="eyebrow text-primary">.NET development</span>
-            <h2 class="fw-bold mb-3">Robust .NET systems for enterprise use cases.</h2>
-            <p class="lead text-muted">Whether you need desktop, web, API, or cloud-native applications, our .NET expertise supports reliable delivery.</p>
-            <div class="row">
-              <div class="col-md-6">
-                <h5 class="fw-bold mt-4">Frameworks</h5>
-                <ul class="check-list">
-                  <li>.NET 8</li>
-                  <li>ASP.NET Core</li>
-                  <li>C# programming</li>
-                  <li>Entity Framework</li>
-                </ul>
-              </div>
-              <div class="col-md-6">
-                <h5 class="fw-bold mt-4">Application Types</h5>
-                <ul class="check-list">
-                  <li>Web applications</li>
-                  <li>Desktop applications</li>
-                  <li>Cloud-native applications</li>
-                  <li>Microservices</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <div class="service-visual d-flex flex-column justify-content-end">
-              <span>Enterprise platform engineering</span>
-              <span class="visual-icon icon-dotnet" aria-hidden="true"></span>
-            </div>
-          </div>
-        </div>
-
-        <div id="cloud" class="row g-4 service-row">
-          <div class="col-lg-6 order-lg-2">
-            <span class="eyebrow text-primary">Cloud & Azure</span>
-            <h2 class="fw-bold mb-3">Cloud foundations that scale without waste.</h2>
-            <p class="lead text-muted">We help businesses modernize infrastructure, automate delivery, optimize costs, and improve operational reliability.</p>
-            <div class="row">
-              <div class="col-md-6">
-                <h5 class="fw-bold mt-4">Azure Services</h5>
-                <ul class="check-list">
-                  <li>Cloud migration strategy</li>
-                  <li>Architecture design</li>
-                  <li>Infrastructure automation</li>
-                  <li>Azure DevOps implementation</li>
-                </ul>
-              </div>
-              <div class="col-md-6">
-                <h5 class="fw-bold mt-4">Outcomes</h5>
-                <ul class="check-list">
-                  <li>Scalability on demand</li>
-                  <li>Cost reduction</li>
-                  <li>Improved reliability</li>
-                  <li>Stronger observability</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-6 order-lg-1">
-            <div class="service-visual d-flex flex-column justify-content-end">
-              <span>Azure architecture and operations</span>
-              <span class="visual-icon icon-cloud" aria-hidden="true"></span>
-            </div>
-          </div>
-        </div>
-
-        <div id="legacy" class="row g-4 service-row">
-          <div class="col-lg-6">
-            <span class="eyebrow text-primary">Modernization</span>
-            <h2 class="fw-bold mb-3">Reduce legacy drag while protecting business continuity.</h2>
-            <p class="lead text-muted">We modernize aging applications through careful assessment, practical architecture, and phased delivery.</p>
-            <div class="row">
-              <div class="col-md-6">
-                <h5 class="fw-bold mt-4">Services</h5>
-                <ul class="check-list">
-                  <li>.NET Framework modernization</li>
-                  <li>Application re-architecture</li>
-                  <li>Database modernization</li>
-                  <li>UI/UX upgrades</li>
-                </ul>
-              </div>
-              <div class="col-md-6">
-                <h5 class="fw-bold mt-4">Why Modernize?</h5>
-                <ul class="check-list">
-                  <li>Reduce maintenance costs</li>
-                  <li>Improve system reliability</li>
-                  <li>Enable faster feature delivery</li>
-                  <li>Enhance security posture</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <div class="service-visual d-flex flex-column justify-content-end">
-              <span>Legacy transformation roadmap</span>
-              <span class="visual-icon icon-modernize" aria-hidden="true"></span>
-            </div>
-          </div>
-        </div>
-
-        <div id="teams" class="row g-4 service-row">
-          <div class="col-lg-6 order-lg-2">
-            <span class="eyebrow text-primary">Dedicated teams</span>
-            <h2 class="fw-bold mb-3">Add skilled engineering capacity without slowing down.</h2>
-            <p class="lead text-muted">Our developers and technical specialists work as an extension of your team across project-based and long-term engagements.</p>
-            <div class="row">
-              <div class="col-md-6">
-                <h5 class="fw-bold mt-4">Available Resources</h5>
-                <ul class="check-list">
-                  <li>.NET developers</li>
-                  <li>Full stack developers</li>
-                  <li>Azure engineers</li>
-                  <li>QA and DevOps engineers</li>
-                </ul>
-              </div>
-              <div class="col-md-6">
-                <h5 class="fw-bold mt-4">Engagement Models</h5>
-                <ul class="check-list">
-                  <li>Dedicated resource</li>
-                  <li>Dedicated team</li>
-                  <li>Project-based delivery</li>
-                  <li>Offshore development center</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-6 order-lg-1">
-            <div class="service-visual d-flex flex-column justify-content-end">
-              <span>Team extension and delivery support</span>
-              <span class="visual-icon icon-team" aria-hidden="true"></span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="cta-band">
-      <div class="container">
-        <h2>Ready to get started?</h2>
-        <p>Choose the service that best fits your needs and let us shape a practical delivery plan together.</p>
-        <a href="/contact.html" class="btn btn-light btn-lg">Contact Our Team</a>
-      </div>
-    </section>
+<section class="cta-band">
+    <div class="container">
+        <h2>@Model.PageContent.Cta.Title</h2>
+        <p>@Model.PageContent.Cta.Description</p>
+        <a href="@Model.PageContent.Cta.Action.Url" class="@Model.PageContent.Cta.Action.CssClass">@Model.PageContent.Cta.Action.Text</a>
+    </div>
+</section>

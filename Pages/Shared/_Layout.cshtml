@@ -3,6 +3,7 @@
     var description = ViewData["Description"] as string ?? "Global software development and IT services company specializing in custom software solutions and cloud technologies.";
     var activePage = ViewData["ActivePage"] as string ?? "";
 }
+@inject Velonixs.Services.SiteContentService Content
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +16,7 @@
     <link rel="stylesheet" href="~/assets/css/style.css" asp-append-version="true" />
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="/">
                 <img src="~/assets/images/logo-nav.png" asp-append-version="true" alt="Velonixs logo" class="brand-logo">
@@ -25,11 +26,13 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <div class="navbar-nav ms-auto">
-                    <a class="nav-link @(activePage == "Home" ? "active" : "")" href="/">Home</a>
-                    <a class="nav-link @(activePage == "Services" ? "active" : "")" href="/services.html">Services</a>
-                    <a class="nav-link @(activePage == "About" ? "active" : "")" href="/about.html">About Us</a>
-                    <a class="nav-link @(activePage == "Contact" ? "active" : "")" href="/contact.html">Contact</a>
+                <div class="navbar-nav ms-auto align-items-lg-center">
+                    @foreach (var link in Content.NavigationLinks)
+                    {
+                        var activeName = link.Text == "About Us" ? "About" : link.Text;
+                        <a class="nav-link @(activePage == activeName ? "active" : "")" href="@link.Url">@link.Text</a>
+                    }
+                    <a class="btn btn-primary ms-lg-3 mt-2 mt-lg-0" href="/contact">Get Started</a>
                 </div>
             </div>
         </div>
@@ -50,19 +53,19 @@
                 <div class="col-md-6 col-lg-3">
                     <h5>Quick Links</h5>
                     <ul class="list-unstyled">
-                        <li class="mb-2"><a href="/">Home</a></li>
-                        <li class="mb-2"><a href="/services.html">Services</a></li>
-                        <li class="mb-2"><a href="/about.html">About Us</a></li>
-                        <li class="mb-2"><a href="/contact.html">Contact</a></li>
+                        @foreach (var link in Content.FooterQuickLinks)
+                        {
+                            <li class="mb-2"><a href="@link.Url">@link.Text</a></li>
+                        }
                     </ul>
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <h5>Services</h5>
                     <ul class="list-unstyled">
-                        <li class="mb-2"><a href="/services.html#custom-software">Custom Software</a></li>
-                        <li class="mb-2"><a href="/services.html#web-apps">Web Applications</a></li>
-                        <li class="mb-2"><a href="/services.html#cloud">Cloud Solutions</a></li>
-                        <li class="mb-2"><a href="/services.html#legacy">Legacy Modernization</a></li>
+                        @foreach (var link in Content.FooterServiceLinks)
+                        {
+                            <li class="mb-2"><a href="@link.Url">@link.Text</a></li>
+                        }
                     </ul>
                 </div>
                 <div class="col-md-6 col-lg-3">
@@ -70,7 +73,7 @@
                     <ul class="list-unstyled">
                         <li class="mb-2">Email: <a href="mailto:info@velonixs.com">info@velonixs.com</a></li>
                         <li class="mb-2">Website: <a href="https://velonixs.com">velonixs.com</a></li>
-                        <li class="mt-3"><a href="#">LinkedIn</a> | <a href="#">Twitter</a> | <a href="#">Facebook</a></li>
+                        <li class="mt-3"><a href="https://www.linkedin.com/company/velonixs-technologies/" target="_blank" rel="noopener noreferrer">LinkedIn</a> | <a href="#">Twitter</a> | <a href="#">Facebook</a></li>
                     </ul>
                 </div>
             </div>

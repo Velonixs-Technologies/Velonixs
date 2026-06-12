@@ -1,4 +1,5 @@
-@page "/about.html"
+@page "/about"
+@model AboutModel
 @{
     ViewData["Title"] = "About Us - Velonixs Technology";
     ViewData["Description"] = "Learn about Velonixs Technology, our mission, values, development process, and technology expertise.";
@@ -6,209 +7,120 @@
 }
 
 <section class="page-hero">
-      <div class="container">
-        <h1>About Velonixs Technology</h1>
-        <p>Engineering digital excellence through reliable software delivery and long-term technology partnerships.</p>
-      </div>
-    </section>
+    <div class="container">
+        <h1>@Model.PageContent.Hero.Title</h1>
+        <p>@Model.PageContent.Hero.Description</p>
+    </div>
+</section>
 
-    <section class="section">
-      <div class="container">
+<section class="section">
+    <div class="container">
         <div class="row g-5 align-items-center">
-          <div class="col-lg-6">
-            <span class="eyebrow text-primary">Who we are</span>
-            <h2 class="fw-bold mb-3">A practical technology partner for modern businesses.</h2>
-            <p class="lead text-muted">Velonixs Technology was founded to bridge business challenges and technology solutions. Organizations need partners who understand software development, business processes, scalability, security, and long-term maintainability.</p>
-            <p class="text-muted">Our expertise spans enterprise software development, cloud computing, application modernization, DevOps implementation, and dedicated engineering services.</p>
-            <p class="fw-bold mb-0">Headquartered in India | Serving Clients Globally</p>
-          </div>
-          <div class="col-lg-6">
-            <img src="/assets/img/hero-dashboard.png" alt="Velonixs software delivery dashboard" class="rounded-3 shadow">
-          </div>
+            <div class="col-lg-6">
+                <span class="eyebrow text-primary">@Model.PageContent.Intro.Eyebrow</span>
+                <h2 class="fw-bold mb-3">@Model.PageContent.Intro.Title</h2>
+                @foreach (var paragraph in Model.PageContent.Intro.Paragraphs)
+                {
+                    <p class="@(paragraph == Model.PageContent.Intro.Paragraphs.First() ? "lead " : "")text-muted">@paragraph</p>
+                }
+                <p class="fw-bold mb-0">@Model.PageContent.Intro.Highlight</p>
+            </div>
+            <div class="col-lg-6">
+                <img src="@Model.PageContent.Intro.ImageUrl" alt="@Model.PageContent.Intro.ImageAlt" class="rounded-3 shadow">
+            </div>
         </div>
-      </div>
-    </section>
+    </div>
+</section>
 
-    <section class="section section-alt">
-      <div class="container">
+<section class="section section-alt">
+    <div class="container">
         <div class="section-heading">
-          <h2>Our Vision & Mission</h2>
-          <p>Clear principles that shape how we partner, plan, build, and support software.</p>
+            <h2>@Model.PageContent.VisionHeading.Title</h2>
+            <p>@Model.PageContent.VisionHeading.Description</p>
         </div>
         <div class="row g-4">
-          <div class="col-md-6">
-            <article class="value-card border-start border-primary border-5">
-              <h3>Our Vision</h3>
-              <p>To become a globally trusted technology partner recognized for delivering innovative, scalable, and business-driven software solutions that create lasting value.</p>
-            </article>
-          </div>
-          <div class="col-md-6">
-            <article class="value-card border-start border-primary border-5">
-              <h3>Our Mission</h3>
-              <p>To empower businesses through reliable, secure, and high-quality software solutions that generate measurable business value and accelerate digital transformation.</p>
-            </article>
-          </div>
+            @foreach (var card in Model.PageContent.VisionCards)
+            {
+                <div class="@card.ColumnClass">
+                    <article class="@card.ArticleClass">
+                        <h3>@card.Title</h3>
+                        <p>@card.Description</p>
+                    </article>
+                </div>
+            }
         </div>
-      </div>
-    </section>
+    </div>
+</section>
 
-    <section class="section">
-      <div class="container">
+<section class="section">
+    <div class="container">
         <div class="section-heading">
-          <h2>Our Core Values</h2>
-          <p>The operating principles behind our engineering and client relationships.</p>
+            <h2>@Model.PageContent.ValuesHeading.Title</h2>
+            <p>@Model.PageContent.ValuesHeading.Description</p>
         </div>
         <div class="row g-4">
-          <div class="col-md-6 col-lg-4">
-            <article class="feature-card">
-              <span class="icon-box icon-excellence" aria-hidden="true"></span>
-              <h3>Excellence</h3>
-              <p>We strive for technical excellence in every project, with high standards for quality and craft.</p>
-            </article>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <article class="feature-card">
-              <span class="icon-box icon-trust" aria-hidden="true"></span>
-              <h3>Integrity</h3>
-              <p>We build relationships based on transparency, trust, accountability, and responsible delivery.</p>
-            </article>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <article class="feature-card">
-              <span class="icon-box icon-innovation" aria-hidden="true"></span>
-              <h3>Innovation</h3>
-              <p>We explore modern technologies and practices when they create real client value.</p>
-            </article>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <article class="feature-card">
-              <span class="icon-box icon-quality" aria-hidden="true"></span>
-              <h3>Customer Success</h3>
-              <p>Our success is measured by the outcomes and operating improvements our clients achieve.</p>
-            </article>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <article class="feature-card">
-              <span class="icon-box icon-learning" aria-hidden="true"></span>
-              <h3>Continuous Learning</h3>
-              <p>We continuously upgrade our skills to stay useful in a fast-moving technology landscape.</p>
-            </article>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <article class="feature-card">
-              <span class="icon-box icon-partnership" aria-hidden="true"></span>
-              <h3>Partnership</h3>
-              <p>We focus on long-term relationships and becoming a dependable extension of your team.</p>
-            </article>
-          </div>
+            @foreach (var card in Model.PageContent.ValueCards)
+            {
+                <div class="@card.ColumnClass">
+                    <article class="@card.ArticleClass">
+                        <span class="icon-box @card.IconClass" aria-hidden="true"></span>
+                        <h3>@card.Title</h3>
+                        <p>@card.Description</p>
+                    </article>
+                </div>
+            }
         </div>
-      </div>
-    </section>
+    </div>
+</section>
 
-    <section class="section section-alt">
-      <div class="container">
+<section class="section section-alt">
+    <div class="container">
         <div class="section-heading">
-          <h2>Our Development Process</h2>
-          <p>A clear, collaborative approach from discovery through support.</p>
+            <h2>@Model.PageContent.ProcessHeading.Title</h2>
+            <p>@Model.PageContent.ProcessHeading.Description</p>
         </div>
         <div class="row g-4">
-          <div class="col-md-6 col-lg-4">
-            <article class="process-step">
-              <span class="step-number">1</span>
-              <h3>Discovery</h3>
-              <p class="text-muted mb-0">Understand business requirements, goals, users, constraints, and success metrics.</p>
-            </article>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <article class="process-step">
-              <span class="step-number">2</span>
-              <h3>Planning</h3>
-              <p class="text-muted mb-0">Create the solution approach, delivery roadmap, team plan, and estimates.</p>
-            </article>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <article class="process-step">
-              <span class="step-number">3</span>
-              <h3>Design</h3>
-              <p class="text-muted mb-0">Shape user experience, technical architecture, integrations, and data flows.</p>
-            </article>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <article class="process-step">
-              <span class="step-number">4</span>
-              <h3>Development</h3>
-              <p class="text-muted mb-0">Build iteratively with regular checkpoints, demos, and backlog refinement.</p>
-            </article>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <article class="process-step">
-              <span class="step-number">5</span>
-              <h3>Testing</h3>
-              <p class="text-muted mb-0">Validate functionality, performance, security, accessibility, and release readiness.</p>
-            </article>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <article class="process-step">
-              <span class="step-number">6</span>
-              <h3>Support</h3>
-              <p class="text-muted mb-0">Provide maintenance, improvements, monitoring, and ongoing optimization.</p>
-            </article>
-          </div>
+            @foreach (var step in Model.PageContent.ProcessSteps)
+            {
+                <div class="col-md-6 col-lg-4">
+                    <article class="process-step">
+                        <span class="step-number">@step.Number</span>
+                        <h3>@step.Title</h3>
+                        <p class="text-muted mb-0">@step.Description</p>
+                    </article>
+                </div>
+            }
         </div>
-      </div>
-    </section>
+    </div>
+</section>
 
-    <section class="section">
-      <div class="container">
+<section class="section">
+    <div class="container">
         <div class="section-heading">
-          <h2>Our Technology Stack</h2>
-          <p>Modern tools selected for reliability, developer productivity, and long-term maintainability.</p>
+            <h2>@Model.PageContent.TechHeading.Title</h2>
+            <p>@Model.PageContent.TechHeading.Description</p>
         </div>
         <div class="tech-grid">
-          <article class="tech-card">
-            <h3>Microsoft</h3>
-            <ul class="check-list">
-              <li>.NET 8</li>
-              <li>ASP.NET Core</li>
-              <li>C#</li>
-              <li>Entity Framework</li>
-            </ul>
-          </article>
-          <article class="tech-card">
-            <h3>Frontend</h3>
-            <ul class="check-list">
-              <li>React</li>
-              <li>Angular</li>
-              <li>TypeScript</li>
-              <li>Responsive Design</li>
-            </ul>
-          </article>
-          <article class="tech-card">
-            <h3>Cloud & DevOps</h3>
-            <ul class="check-list">
-              <li>Microsoft Azure</li>
-              <li>Azure DevOps</li>
-              <li>Docker & Kubernetes</li>
-              <li>CI/CD pipelines</li>
-            </ul>
-          </article>
-          <article class="tech-card">
-            <h3>Databases</h3>
-            <ul class="check-list">
-              <li>SQL Server</li>
-              <li>PostgreSQL</li>
-              <li>MongoDB</li>
-              <li>MySQL</li>
-            </ul>
-          </article>
+            @foreach (var group in Model.PageContent.TechGroups)
+            {
+                <article class="tech-card">
+                    <h3>@group.Title</h3>
+                    <ul class="check-list">
+                        @foreach (var item in group.Items)
+                        {
+                            <li>@item</li>
+                        }
+                    </ul>
+                </article>
+            }
         </div>
-      </div>
-    </section>
+    </div>
+</section>
 
-    <section class="cta-band">
-      <div class="container">
-        <h2>Let's build something great together.</h2>
-        <p>Connect with our team to discuss how Velonixs can help transform your business with practical technology solutions.</p>
-        <a href="/contact.html" class="btn btn-light btn-lg">Get in Touch</a>
-      </div>
-    </section>
+<section class="cta-band">
+    <div class="container">
+        <h2>@Model.PageContent.Cta.Title</h2>
+        <p>@Model.PageContent.Cta.Description</p>
+        <a href="@Model.PageContent.Cta.Action.Url" class="@Model.PageContent.Cta.Action.CssClass">@Model.PageContent.Cta.Action.Text</a>
+    </div>
+</section>
