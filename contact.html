@@ -93,11 +93,11 @@
             </div>
           </div>
           <div class="col-lg-7">
-            <form id="contactForm" class="contact-form needs-validation" action="https://formsubmit.co/info@velonixs.com" method="POST" novalidate>
-              <input type="hidden" name="_subject" value="New Velonixs website enquiry">
-              <input type="hidden" name="_template" value="table">
-              <input type="hidden" name="_next" value="https://velonixs.com/contact.html?submitted=true">
-              <input type="text" name="_honey" class="d-none" tabindex="-1" autocomplete="off">
+            <form id="contactForm" class="contact-form needs-validation" action="https://api.web3forms.com/submit" method="POST" novalidate>
+              <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
+              <input type="hidden" name="subject" value="New Velonixs website enquiry">
+              <input type="hidden" name="redirect" value="https://velonixs.com/index.html?submitted=true">
+              <input type="checkbox" name="botcheck" class="d-none" tabindex="-1" autocomplete="off">
               <div class="row g-3">
                 <div class="col-md-6">
                   <label for="name" class="form-label fw-bold">Full Name *</label>

@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (params.get("submitted") === "true") {
     alert("Thank you for your message. We will get back to you soon.");
+    window.history.replaceState({}, document.title, window.location.pathname);
   }
 
   if (contactForm) {
