@@ -23,7 +23,9 @@ var legacyRoutes = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCa
     ["/index.html"] = "/",
     ["/services.html"] = "/services",
     ["/about.html"] = "/about",
-    ["/contact.html"] = "/contact"
+    ["/contact.html"] = "/contact",
+    ["/privacy-policy.html"] = "/privacy-policy",
+    ["/terms-conditions.html"] = "/terms-conditions"
 };
 
 app.Use(async (context, next) =>

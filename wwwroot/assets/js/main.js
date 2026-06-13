@@ -21,18 +21,27 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   const contactForm = document.getElementById("contactForm");
+  const params = new URLSearchParams(window.location.search);
+
+  if (params.get("submitted") === "true") {
+    alert("Thank you for your message. We will get back to you soon.");
+    window.history.replaceState({}, document.title, window.location.pathname);
+  }
+
   if (contactForm) {
     contactForm.addEventListener("submit", function (event) {
-      event.preventDefault();
-
       if (!contactForm.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
         contactForm.classList.add("was-validated");
         return;
       }
 
-      alert("Thank you for your message. We will get back to you soon.");
-      contactForm.reset();
-      contactForm.classList.remove("was-validated");
+      const submitButton = contactForm.querySelector('button[type="submit"]');
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = "Sending...";
+      }
     });
   }
 });

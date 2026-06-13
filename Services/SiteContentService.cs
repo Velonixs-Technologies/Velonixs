@@ -144,13 +144,13 @@ public sealed class SiteContentService
             new LinkItem("Contact Our Team", "/contact", "btn btn-light btn-lg")));
 
     public AboutPageContent About { get; } = new(
-        new PageHeroContent("About Velonixs Technology", "Engineering digital excellence through reliable software delivery and long-term technology partnerships."),
+        new PageHeroContent("About Velonixs Technologies", "Engineering digital excellence through reliable software delivery and long-term technology partnerships."),
         new IntroContent(
             "Who we are",
             "A practical technology partner for modern businesses.",
             new[]
             {
-                "Velonixs Technology was founded to bridge business challenges and technology solutions. Organizations need partners who understand software development, business processes, scalability, security, and long-term maintainability.",
+                "Velonixs Technologies was founded to bridge business challenges and technology solutions. Organizations need partners who understand software development, business processes, scalability, security, and long-term maintainability.",
                 "Our expertise spans enterprise software development, cloud computing, application modernization, DevOps implementation, and dedicated engineering services."
             },
             "Headquartered in India | Serving Clients Globally",

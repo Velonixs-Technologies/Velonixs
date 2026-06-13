@@ -1,8 +1,8 @@
 @page "/contact"
 @model ContactModel
 @{
-    ViewData["Title"] = "Contact Us - Velonixs Technology";
-    ViewData["Description"] = "Contact Velonixs Technology to discuss your software development, cloud, modernization, or dedicated engineering team needs.";
+    ViewData["Title"] = "Contact Us - Velonixs Technologies";
+    ViewData["Description"] = "Contact Velonixs Technologies to discuss your software development, cloud, modernization, or dedicated engineering team needs.";
     ViewData["ActivePage"] = "Contact";
 }
 
@@ -66,7 +66,11 @@
                 </div>
             </div>
             <div class="col-lg-7">
-                <form id="contactForm" class="contact-form needs-validation" novalidate>
+                <form id="contactForm" class="contact-form needs-validation" action="https://api.web3forms.com/submit" method="POST" novalidate>
+                    <input type="hidden" name="access_key" value="7d1ef463-2f0f-4b9b-8a73-9875eba8b8da">
+                    <input type="hidden" name="subject" value="New Velonixs website enquiry">
+                    <input type="hidden" name="redirect" value="https://velonixs.com/?submitted=true">
+                    <input type="checkbox" name="botcheck" class="d-none" tabindex="-1" autocomplete="off">
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label for="name" class="form-label fw-bold">Full Name *</label>
@@ -105,7 +109,7 @@
                         <div class="col-12">
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="agree" name="agree" required>
-                                <label class="form-check-label" for="agree">I agree to the privacy policy and terms of service.</label>
+                                <label class="form-check-label" for="agree">I agree to the <a href="/privacy-policy">privacy policy</a> and <a href="/terms-conditions">terms &amp; conditions</a>.</label>
                                 <div class="invalid-feedback">Please confirm before submitting.</div>
                             </div>
                         </div>
